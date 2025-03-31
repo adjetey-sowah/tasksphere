@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Todo App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="app-container">
+    <header>
+        <h1>Todo App</h1>
+        <div class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </header>
+
+    <div class="app-main">
+        <div class="filters-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search todos...">
+            </div>
+
+            <div class="filter-options">
+                <select id="priority-filter">
+                    <option value="all">All Priorities</option>
+                    <option value="HIGH">High</option>
+                    <option value="MEDIUM">Medium</option>
+                    <option value="LOW">Low</option>
+                </select>
+
+                <select id="status-filter">
+                    <option value="all">All Status</option>
+                    <option value="completed">Completed</option>
+                    <option value="active">Active</option>
+                </select>
+
+                <select id="sort-by">
+                    <option value="createdAt">Sort by Date Created</option>
+                    <option value="dueDate">Sort by Due Date</option>
+                    <option value="priority">Sort by Priority</option>
+                    <option value="title">Sort by Title</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="add-todo-container">
+            <form id="add-todo-form">
+                <input type="text" id="todo-title" placeholder="Add a new task..." required>
+                <div class="todo-details">
+                    <div class="priority-selector">
+                        <label for="todo-priority">Priority:</label>
+                        <select id="todo-priority">
+                            <option value="LOW">Low</option>
+                            <option value="MEDIUM" selected>Medium</option>
+                            <option value="HIGH">High</option>
+                        </select>
+                    </div>
+                    <div class="date-selector">
+                        <label for="todo-due-date">Due date:</label>
+                        <input type="date" id="todo-due-date">
+                    </div>
+                    <textarea id="todo-description" placeholder="Description (optional)"></textarea>
+                </div>
+                <button type="submit" class="add-btn">Add Task</button>
+            </form>
+        </div>
+
+        <div class="todos-container" id="todos-list">
+            <!-- Todo items will be inserted here dynamically -->
+            <div class="loading-indicator">
+                <div class="spinner"></div>
+                <p>Loading your tasks...</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="stats">
+            <span id="total-todos">0 total</span>
+            <span id="completed-todos">0 completed</span>
+        </div>
+        <p>&copy; 2025 Modern Todo App</p>
+    </footer>
+</div>
+
+<!-- Modal for subtasks -->
+<div id="subtask-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Manage Subtasks</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="subtask-parent-info">
+                <h4 id="parent-task-title">Parent Task Title</h4>
+                <p id="parent-task-description">Parent task description will appear here.</p>
+            </div>
+
+            <div class="add-subtask-form">
+                <input type="text" id="subtask-title" placeholder="Add a subtask...">
+                <button id="add-subtask-btn">Add</button>
+            </div>
+
+            <ul id="subtasks-list" class="subtasks-list">
+                <!-- Subtasks will be inserted here dynamically -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/subTask.js"></script>
+<script src="js/todoItem.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
