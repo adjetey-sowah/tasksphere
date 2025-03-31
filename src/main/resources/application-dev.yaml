@@ -1,2 +1,6 @@
 server:
   port: 8000
+
+
+aws:
+  region: eu-central-1
