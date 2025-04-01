@@ -48,11 +48,6 @@ jobs:
   deploy-to-ecs:
     needs: build-and-push
     runs-on: ubuntu-latest
-    env:
-      IMAGE_URI: ${{ needs.build-and-push.outputs.image_uri }}
-    run: |
-      # Debug - confirm we have the image
-      echo "Using image: $IMAGE_URI"
 
     steps:
       - name: Checkout code
@@ -66,8 +61,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: eu-central-1
 
+
       - name: Create AppSpec and TaskDef files
+        env:
+          IMAGE_URI: ${{needs.build-and-push.outputs.image_uri}}
+
         run: |
+          # Debug - confirm we have the image
+          echo "Using image: $IMAGE_URI"
+          
           # Get task definition values
           TASK_DEF_ARN=$(aws ecs describe-task-definition --region eu-central-1 --task-definition tasksphere --query "taskDefinition.taskDefinitionArn" --output text)
           TASK_DEF_FAMILY=$(echo $TASK_DEF_ARN | cut -d'/' -f2 | cut -d':' -f1)
