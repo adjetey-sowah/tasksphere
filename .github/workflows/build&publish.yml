@@ -64,7 +64,7 @@ jobs:
 
       - name: Create AppSpec and TaskDef files
         env:
-          IMAGE_URI: ${{needs.build-and-push.outputs.image_uri}}
+          IMAGE_URI: ${{env.IMAGE_URI}}
 
         run: |
           # Debug - confirm we have the image
