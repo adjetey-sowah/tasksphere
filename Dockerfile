@@ -11,8 +11,8 @@ FROM openjdk:21-slim
 
 COPY --from=build /target/*.jar app.jar
 
-HEALTHCHECK --interval=30s --timeout=3s CMD wget -q -O- http://localhost:5000/health || exit 1
+HEALTHCHECK --interval=30s --timeout=3s CMD wget -q -O- http://localhost:8000/health || exit 1
 
-EXPOSE 5000
+EXPOSE 8000
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: TaskSphere
+
+  profiles:
+    active: prod
+
+logging:
+  level:
+    root: INFO # Set logging level to INFO for production
+    org.springframework.web: WARN
+    com.giftedlabs.tasksphere: DEBUG # App-specific logging level
+
+
+

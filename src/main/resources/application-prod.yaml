@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 5000
 
 
 cloud:
@@ -9,5 +9,3 @@ cloud:
       secret-key: ${AWS_SECRET_KEY}
     region:
       static: ${AWS_REGION}
-
-
