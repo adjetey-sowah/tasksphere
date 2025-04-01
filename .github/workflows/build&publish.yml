@@ -12,6 +12,8 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    outputs:
+      image_uri: ${{ steps.build-image.outputs.image_uri }}
     env:
       ECR_REPOSITORY_URI : public.ecr.aws/i3g8s7k5/giftedlabs/tasksphere
 
