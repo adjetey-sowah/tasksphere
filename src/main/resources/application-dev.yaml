@@ -2,5 +2,15 @@ server:
   port: 8000
 
 
-aws:
-  region: eu-central-1
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_ACCESS_KEY_ID}
+      secret-key: ${AWS_SECRET_KEY}
+    region:
+      static: ${AWS_REGION}
+
+spring:
+  application:
+    name: TaskSphere
+

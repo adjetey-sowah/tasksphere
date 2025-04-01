@@ -16,10 +16,12 @@ import java.util.List;
 public class TodoRepository {
 
     private final DynamoDbTable<TodoItem> todoTable;
+    private final DynamoDbEnhancedClient enhancedClient;
 
     @Autowired
     public TodoRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient){
-        this.todoTable = dynamoDbEnhancedClient.table("TodoItem", TableSchema.fromBean(TodoItem.class));
+        this.enhancedClient = dynamoDbEnhancedClient;
+        this.todoTable = enhancedClient.table("TodoItems", TableSchema.fromBean(TodoItem.class));
     }
 
     public TodoItem save(TodoItem todoItem) {
