@@ -3,6 +3,7 @@ package com.giftedlabs.tasksphere.service;
 import com.giftedlabs.tasksphere.entity.SubTask;
 import com.giftedlabs.tasksphere.entity.TodoItem;
 import com.giftedlabs.tasksphere.exception.BadRequestException;
+import com.giftedlabs.tasksphere.exception.ResourceNotFoundException;
 import com.giftedlabs.tasksphere.repository.TodoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class TodoService {
@@ -45,7 +47,7 @@ public class TodoService {
         return todoItem;
     }
 
-    @Transactional
+
     public TodoItem createTodo(TodoItem todoItem) {
         if (todoItem == null) {
             throw new BadRequestException("Todo item cannot be null");
@@ -59,7 +61,6 @@ public class TodoService {
         return todoRepository.save(todoItem);
     }
 
-    @Transactional
     public TodoItem updateTodo(String id, TodoItem todoItem) {
         if (!StringUtils.hasText(id)) {
             throw new BadRequestException("Todo ID cannot be empty");
@@ -81,7 +82,7 @@ public class TodoService {
         return todoRepository.save(todoItem);
     }
 
-    @Transactional
+
     public void deleteTodo(String id) {
         if (!StringUtils.hasText(id)) {
             throw new BadRequestException("Todo ID cannot be empty");
@@ -92,7 +93,7 @@ public class TodoService {
         todoRepository.delete(todo);
     }
 
-    @Transactional
+
     public TodoItem addSubTask(String todoId, SubTask subTask) {
         if (!StringUtils.hasText(todoId)) {
             throw new BadRequestException("Todo ID cannot be empty");
@@ -102,9 +103,7 @@ public class TodoService {
             throw new BadRequestException("SubTask cannot be null");
         }
 
-        if (!StringUtils.hasText(subTask.getDescription())) {
-            throw new BadRequestException("SubTask description cannot be empty");
-        }
+
 
         logger.debug("Adding subtask to todo with id: {}", todoId);
         TodoItem todo = getTodoById(todoId);
@@ -112,7 +111,7 @@ public class TodoService {
         return todoRepository.save(todo);
     }
 
-    @Transactional
+
     public TodoItem updateSubTask(String todoId, String subTaskId, SubTask updatedSubTask) {
         if (!StringUtils.hasText(todoId)) {
             throw new BadRequestException("Todo ID cannot be empty");
@@ -148,7 +147,7 @@ public class TodoService {
         return todoRepository.save(todo);
     }
 
-    @Transactional
+
     public TodoItem deleteSubTask(String todoId, String subTaskId) {
         if (!StringUtils.hasText(todoId)) {
             throw new BadRequestException("Todo ID cannot be empty");
