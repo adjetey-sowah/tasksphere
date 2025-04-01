@@ -42,8 +42,8 @@ jobs:
           docker tag ${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }} ${{ env.ECR_REPOSITORY_URI }}:latest
           docker push ${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }}
           docker push ${{ env.ECR_REPOSITORY_URI }}:latest
-          echo "IMAGE_URI=${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }}" >> $GITHUB_ENV
-          echo "Set image_uri to: $IMAGE_URI"
+          echo "image_uri=${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "Set image_uri to: $image_uri"
 
   deploy-to-ecs:
     needs: build-and-push
@@ -64,7 +64,7 @@ jobs:
 
       - name: Create AppSpec and TaskDef files
         env:
-          IMAGE_URI: ${{env.IMAGE_URI}}
+          IMAGE_URI: ${{needs.build-and-push.outputs.image_uri}}
 
         run: |
           # Debug - confirm we have the image
