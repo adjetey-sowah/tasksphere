@@ -10,7 +10,7 @@ on:
       - 'README.md'
 
 jobs:
-  build-and-deploy:
+  build-and-push:
     runs-on: ubuntu-latest
     env:
       ECR_REPOSITORY_URI : public.ecr.aws/i3g8s7k5/giftedlabs/tasksphere
