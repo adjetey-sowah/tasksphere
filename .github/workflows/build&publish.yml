@@ -43,7 +43,7 @@ jobs:
           docker push ${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }}
           docker push ${{ env.ECR_REPOSITORY_URI }}:latest
           echo "image_uri=${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }}" >> $GITHUB_ENV
-          echo "Set image_uri to: ${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }}"
+          echo "Set image_uri to: $image_uri"
 
   deploy-to-ecs:
     needs: build-and-push
