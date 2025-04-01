@@ -42,13 +42,17 @@ jobs:
           docker tag ${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }} ${{ env.ECR_REPOSITORY_URI }}:latest
           docker push ${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }}
           docker push ${{ env.ECR_REPOSITORY_URI }}:latest
-          echo "IMAGE_URI=${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }}" >> $GITHUB_ENV
+          echo "image_uri=${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }}" >> $GITHUB_ENV
+          echo "Set image_uri to: ${{ env.ECR_REPOSITORY_URI }}:${{ github.sha }}"
 
   deploy-to-ecs:
     needs: build-and-push
     runs-on: ubuntu-latest
     env:
       IMAGE_URI: ${{ needs.build-and-push.outputs.image_uri }}
+    run: |
+      # Debug - confirm we have the image
+      echo "Using image: $IMAGE_URI"
 
     steps:
       - name: Checkout code
