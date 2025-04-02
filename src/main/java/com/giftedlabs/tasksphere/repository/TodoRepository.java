@@ -21,7 +21,7 @@ public class TodoRepository {
     @Autowired
     public TodoRepository(DynamoDbEnhancedClient dynamoDbEnhancedClient){
         this.enhancedClient = dynamoDbEnhancedClient;
-        this.todoTable = enhancedClient.table("TodoItems", TableSchema.fromBean(TodoItem.class));
+        this.todoTable = enhancedClient.table("TodoItem", TableSchema.fromBean(TodoItem.class));
     }
 
     public TodoItem save(TodoItem todoItem) {
